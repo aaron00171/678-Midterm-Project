@@ -3,14 +3,24 @@ title: "MA678-Final Project Report"
 author: "Jiaheng Li"
 date: "2020/12/6"
 output:
-  pdf_document: default
+  word_document: default
   html_document: default
+  pdf_document: default
 ---
 
 
-#Project description
+## Abstract
 
-My project is to use the data of video game sales with ratings to analyze the environment of the global game market; how would the gaming ratings affect the game sales and whether there would be a trend of Home Video Game Console or the Handheld Game Console in the world game hardware market. My dataset is downloaded from Kaggle (https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings/discussion). It is motivated by Gregory Smith's web scrape of VGChartz Video Games Sales, this data set simply extends the number of variables with another web scrape from Metacritic. 
+Even since the launch of Atari's first home game console in 1977, a whole new revolution has spread in the game industry. Until today, major game manufacturers have successively launched their own game models from generation to generation. Among them, Sony and Nintendo may be the two most familiar mainstream game console manufacturers today. If we take close look of the types of modern game consoles, it is not difficult for us to find that the types of mainstream game consoles today can be divided into two categories, one is Home Video Game Console (hv), and the other is Handheld Game Console (hh). Since it is kind of difficult for us to speculate which game console type will occupy more market value in the future if we only use word-of-mouth among people and friends or read the online comments. Thus, integrating additional analysis may be a necessary step forward for judging the future game market.
+
+
+## Introduction
+
+This report is using the data from Kaggle, (https://www.kaggle.com/rush4ratio/video-game-sales-with-ratings/discussion) It shows us the lots of video game sales with ratings in each mainstream gaming market. And this report will be using this data to analyze the environment of the global game market; how would the gaming ratings affect the game sales and whether there would be a trend of Home Video Game Console (hv) or the Handheld Game Console (hh) in the world game hardware market.
+
+### Addition Information
+
+The data is motivated by Gregory Smith’s web scrape of VGChartz Video Games Sales, this data set simply extends the number of variables with another web scrape from Metacritic.
 
 Alongside the fields: Name, Platform, YearofRelease, Genre, Publisher, NASales, EUSales, JPSales, OtherSales, Global_Sales, we have:-
 
@@ -22,7 +32,46 @@ Developer - Party responsible for creating the game
 Rating - The ESRB ratings
 
 
+## Method
 
+### Data Cleaning and Selection
+
+Basic on the data set I got from Kaggle, I firstly performed a data categorizing on my data set. I categorized the platform column into two categories, ‘hh’ stands for the handheld game console, and the ‘hv’ stands for the home video game console.
+
+Unfortunately, there are missing observations as Metacritic only covers a subset of the platforms. Also, a game may not have all the observations of the additional variables discussed above. In the end, I kept the data of the three major global game markets, which are Europe, North America and Japan. Complete cases are ~ 6,206.
+
+###Model selection and transformations
+
+I firstly did a bunch of Exploratory Data Analysis to find whether there is a particular pattern of the game sales for each type of game console in each area. And what I learnt from it is that within the globe area, except for Japan, the sales of the ‘hv’ games in most situation is higher than the he sales of the ‘hh’ games. 
+
+Then I tried to find out whether the different levels of the two types of the rating score would have a connection with the number of sales in each area. I finally divide each of the two types rating scores into 4 classes with different levels from low to high, and I fit these levels of ratings and the game sales data in different areas into a multivariable linear regression model to see whether they have a linear relationship.
+
+## Result
+
+For global game sales:
+1. When other independent variables remain unchanged, sales of ‘hv’ games are 0.2527 million higher than ‘hh’ games.
+2. When other independent variables remain unchanged, sales of games in the 2nd class of the critic score are 0.19101 million higher than sales of games in the 1st class of the critic score; sales of games in the 3rd class of the critic score are 0.62548 million higher than sales of games in the 1st class of the critic score; sales of games in the 4th class of the critic score are 1.61993 million higher than sales of games in the 1st class of the critic score.
+3. When other independent variables remain unchanged, sales of games in the 2nd class of the user score are 0.14136 million higher than sales of games in the 1st class of the user score; sales of games in the 3rd class of the user score are 0.34792 million higher than sales of games in the 1st class of the user score; sales of games in the 4th class of the user score are 0.50788 million higher than sales of games in the 1st class of the user score.
+For game sales in Japan:
+1. When other independent variables remain unchanged, sales of ‘hv’ games are 0.076786 million lower than ‘hh’ games.
+2. When other independent variables remain unchanged, sales of games in the 2nd class of the critic score are 0.022503 million higher than sales of games in the 1st class of the critic score; sales of games in the 3rd class of the critic score are 0.063261 million higher than sales of games in the 1st class of the critic score; sales of games in the 4th class of the critic score are 0.161150 million higher than sales of games in the 1st class of the critic score.
+3. When other independent variables remain unchanged, sales of games in the 2nd class of the user score are 0.02347 million higher than sales of games in the 1st class of the user score; sales of games in the 3rd class of the user score are 0.04373 million higher than sales of games in the 1st class of the user score; sales of games in the 4th class of the user score are 0.11369 million higher than sales of games in the 1st class of the user score.
+For game sales in North America:
+1. When other independent variables remain unchanged, sales of ‘hv’ games are 0.11889 million higher than ‘hh’ games.
+2. When other independent variables remain unchanged, sales of games in the 2nd class of the critic score are 0.08997 million higher than sales of games in the 1st class of the critic score; sales of games in the 3rd class of the critic score are 0.29397 million higher than sales of games in the 1st class of the critic score; sales of games in the 4th class of the critic score are 0.80184 million higher than sales of games in the 1st class of the critic score.
+3. When other independent variables remain unchanged, sales of games in the 2nd class of the user score are 0.06661 million higher than sales of games in the 1st class of the user score; sales of games in the 3rd class of the user score are 0.16506 million higher than sales of games in the 1st class of the user score; sales of games in the 4th class of the user score are 0.23886 million higher than sales of games in the 1st class of the user score.
+For game sales in Europe:
+1. When other independent variables remain unchanged, sales of ‘hv’ games are 0.07016 million higher than ‘hh’ games.
+2. When other independent variables remain unchanged, sales of games in the 2nd class of the critic score are 0.05730 million higher than sales of games in the 1st class of the critic score; sales of games in the 3rd class of the critic score are 0.20163 million higher than sales of games in the 1st class of the critic score; sales of games in the 4th class of the critic score are 0.47692 million higher than sales of games in the 1st class of the critic score.
+3. When other independent variables remain unchanged, sales of games in the 2nd class of the user score are 0.03197 million higher than sales of games in the 1st class of the user score; sales of games in the 3rd class of the user score are 0.10108 million higher than sales of games in the 1st class of the user score; sales of games in the 4th class of the user score are 0.10950 million higher than sales of games in the 1st class of the user score.
+
+## Discussion
+
+Base on the result of the above EDAs and the modeling. It can be interperate that:
+
+1. The home video console is more likely the mainstream game console in the world except in Japan. And the handheld game console is more likely the mainstream game console in Japan.  
+2. No matter which platforms the game use, the game with a higher rating would generally achieve higher sales. This rule can be applied in both the critic score and the user score.
+3. If a game gets a considerable high critic score, it will be more likely to makes much more sales than the games get a low critic score in comparison with the same situation fit in the user score. This may also infer that the critic score is a more reliable rating score to predict the game sales compare with the user score.
 
 
 ## 1.Package
@@ -214,7 +263,7 @@ for(i in 1:length(gdata1$User_Score)){
 ## 5.Ranked rating score bar charts
 ### 5.1 critic score and sales
 
-Here is a series of bar charts of the games sales fit into the all 4 ranks of critic score in different area. We can clearly see from those charts that for the 'hv' game,  in all areas the higher the critic score the game has the higher sales the game would have. However, for the 'hh' game this kind of pattern only happens in Japan. Thus, It can be informed that compared with the popularity of 'hv' games in globalization, 'hh' games only have a higher market position in Japan. 
+Here is a series of bar charts of the games sales fit into the all 4 ranks of critic score in different area. We can clearly see from those charts that for the 'hv' game, in all areas the higher the critic score the game has the higher sales the game would have. However, for the 'hh' game this kind of pattern only happens in Japan. Thus, It can be informed that compared with the popularity of 'hv' games in globalization, 'hh' games only have a higher market position in Japan. 
 
 ```{r}
 csco_sal <- sqldf("select type, CS_class, sum(Global_Sales) as Global_Sales, sum(NA_Sales) as NA_Sales, sum(EU_Sales) as EU_Sales, sum(JP_Sales) as JP_Sales from gdata1 group by type, CS_class")
@@ -243,29 +292,7 @@ ggplot(user_sal, aes(x=US_class, y=JP_Sales, fill=type)) + geom_bar(stat = "iden
 
 I use the multivariable linear regression model to analyze the relationship between the number of game sales and all 4 classes game ratings of both the critic and user score. The result I got met my expectations. 
 
-For global game sales:
-1.When other independent variables remain unchanged, sales of 'hv' games are 0.2527 million higher than 'hh' games.
-2.When other independent variables remain unchanged, sales of games in the 2nd class of the critic score are 0.19101 million higher than sales of games in the 1st class of the critic score; sales of games in the 3rd class of the critic score are 0.62548 million higher than sales of games in the 1st class of the critic score; sales of games in the 4th class of the critic score are 1.61993 million higher than sales of games in the 1st class of the critic score.
-3.When other independent variables remain unchanged, sales of games in the 2nd class of the user score are 0.14136 million higher than sales of games in the 1st class of the user score; sales of games in the 3rd class of the user score are 0.34792 million higher than sales of games in the 1st class of the user score; sales of games in the 4th class of the user score are 0.50788 million higher than sales of games in the 1st class of the user score.
-
-For game sales in Japan:
-1.When other independent variables remain unchanged, sales of 'hv' games are 0.076786 million lower than 'hh' games.
-2.When other independent variables remain unchanged, sales of games in the 2nd class of the critic score are 0.022503 million higher than sales of games in the 1st class of the critic score; sales of games in the 3rd class of the critic score are 0.063261 million higher than sales of games in the 1st class of the critic score; sales of games in the 4th class of the critic score are 0.161150 million higher than sales of games in the 1st class of the critic score.
-3.When other independent variables remain unchanged, sales of games in the 2nd class of the user score are 0.02347 million higher than sales of games in the 1st class of the user score; sales of games in the 3rd class of the user score are 0.04373 million higher than sales of games in the 1st class of the user score; sales of games in the 4th class of the user score are 0.11369 million higher than sales of games in the 1st class of the user score.
-
-For game sales in North America:
-1.When other independent variables remain unchanged, sales of 'hv' games are 0.11889 million higher than 'hh' games.
-2.When other independent variables remain unchanged, sales of games in the 2nd class of the critic score are 0.08997 million higher than sales of games in the 1st class of the critic score; sales of games in the 3rd class of the critic score are 0.29397 million higher than sales of games in the 1st class of the critic score; sales of games in the 4th class of the critic score are 0.80184 million higher than sales of games in the 1st class of the critic score.
-3.When other independent variables remain unchanged, sales of games in the 2nd class of the user score are 0.06661 million higher than sales of games in the 1st class of the user score; sales of games in the 3rd class of the user score are 0.16506 million higher than sales of games in the 1st class of the user score; sales of games in the 4th class of the user score are 0.23886 million higher than sales of games in the 1st class of the user score.
-
-For game sales in Europe:
-1.When other independent variables remain unchanged, sales of 'hv' games are 0.07016 million higher than 'hh' games.
-2.When other independent variables remain unchanged, sales of games in the 2nd class of the critic score are 0.05730 million higher than sales of games in the 1st class of the critic score; sales of games in the 3rd class of the critic score are 0.20163 million higher than sales of games in the 1st class of the critic score; sales of games in the 4th class of the critic score are 0.47692 million higher than sales of games in the 1st class of the critic score.
-3.When other independent variables remain unchanged, sales of games in the 2nd class of the user score are 0.03197 million higher than sales of games in the 1st class of the user score; sales of games in the 3rd class of the user score are 0.10108 million higher than sales of games in the 1st class of the user score; sales of games in the 4th class of the user score are 0.10950 million higher than sales of games in the 1st class of the user score.
-
-
-
-```{r}
+```{r eval=FALSE}
 fit1 <- lm(Global_Sales~ type  + CS_class , data = gdata1)
 summary(fit1)
 
@@ -290,13 +317,9 @@ summary(fit_EU)
 
 ```
 
-## 7.Conclusion:
 
-Base on the result of the above EDAs and the modeling. It can be interperate that:
 
-1. The home video console is more likely the mainstream game console in the world except in Japan. And the handheld game console is more likely the mainstream game console in Japan.  
-2. No matter which platforms the game use, the game with a higher rating would generally achieve higher sales. This rule can be applied in both the critic score and the user score.
-3. If a game gets a considerable high critic score, it will be more like to makes much more sales than the games get a low critic score in comparison with the same situation fit in the user score. This may also infer that the critic score is a more reliable rating score to predict the game sales compare with the user score.
+
 
 
 
